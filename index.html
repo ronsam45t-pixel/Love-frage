@@ -3,34 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Proposal</title>
+    <title>Valentine Proposal</title>
     <style>
-        body {
-            background-color: #ff69b4; /* Dark pink background */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
-        h1 {
-            color: white;
-            font-size: 3em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        .heart {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url('https://example.com/red-heart-background.jpg') no-repeat center center fixed;
-            background-size: cover;
-            opacity: 0.5;
-        }
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #ffcccb; }
+        #noButton { padding: 20px; font-size: 24px; background-color: red; color: white; border: none; cursor: pointer; position: absolute; }
     </style>
 </head>
 <body>
-    <div class="heart"></div>
-    <h1>WILL YOU BE MY VALENTINE</h1>
+    <h1>Will you be my Valentine?</h1>
+    <button id="noButton">NO</button>
+    <script>
+        const noButton = document.getElementById('noButton');
+        const messages = ["ARE YOU SURE?", "PRETTY PLEASE WITH A CHERRY ON TOP?", "PLEASE POOKIE? 😍"]; 
+        let messageIndex = 0;
+
+        noButton.addEventListener('mouseover', function () {
+            // Move the button away from the cursor
+            const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+        });
+
+        noButton.addEventListener('click', function () {
+            messageIndex = (messageIndex + 1) % messages.length;
+            noButton.textContent = messages[messageIndex];
+
+            // Make the button smaller with each click
+            let currentSize = parseFloat(window.getComputedStyle(noButton).fontSize);
+            noButton.style.fontSize = (currentSize * 0.9) + 'px';
+        });
+    </script>
 </body>
 </html>
